@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Space Exploration & Solar System Tour</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  background:#030303;
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+.stars{
+  position:fixed;
+  inset:0;
+  background-image:
+  radial-gradient(white 1px, transparent 1px),
+  radial-gradient(#00ffff 1px, transparent 1px);
+  background-size:80px 80px,140px 140px;
+  opacity:.12;
+  animation:moveStars 35s linear infinite;
+  z-index:-1;
+}
+
+@keyframes moveStars{
+  from{background-position:0 0}
+  to{background-position:800px 800px}
+}
+
+nav{
+  height:72px;
+  background:#050505ee;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 8%;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid #ffffff22;
+}
+
+.logo{
+  font-size:26px;
+  letter-spacing:4px;
+  font-weight:bold;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+.hero{
+  height:650px;
+  background:
+  linear-gradient(to right,rgba(0,0,0,.96),rgba(0,0,0,.35)),
+  url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1600");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  padding:0 8%;
+}
+
+.hero h1{
+  font-size:70px;
+  line-height:1;
+  margin-bottom:25px;
+}
+
+.hero p{
+  width:650px;
+  font-size:20px;
+  line-height:1.6;
+  color:#ddd;
+}
+
+marquee{
+  background:#0b0b0b;
+  padding:18px;
+  border-top:1px solid #333;
+  border-bottom:1px solid #333;
+}
+
+.tabs{
+  text-align:center;
+  padding:35px 8%;
+  background:#080808;
+}
+
+.tabs button{
+  background:#111;
+  color:white;
+  border:1px solid #444;
+  padding:14px 28px;
+  margin:8px;
+  cursor:pointer;
+  letter-spacing:1px;
+}
+
+.tabs button:hover{
+  background:white;
+  color:black;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  padding:45px 8%;
+  background:#000;
+  text-align:center;
+}
+
+.stat{
+  background:#111;
+  padding:28px;
+  border:1px solid #333;
+}
+
+.stat h2{
+  color:#00ffff;
+  font-size:38px;
+}
+
+.timeline{
+  padding:60px 8%;
+  background:#050505;
+  text-align:center;
+}
+
+.orbit-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:2px solid #ffffff44;
+  margin-top:45px;
+}
+
+.orbit-item{
+  margin-top:-18px;
+  text-align:center;
+}
+
+.dot{
+  width:34px;
+  height:34px;
+  background:white;
+  border-radius:50%;
+  margin:auto;
+  box-shadow:0 0 18px #00ffff;
+}
+
+.orbit-item p{
+  margin-top:12px;
+  font-size:13px;
+}
+
+.cards,.missions,.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  padding:60px 8%;
+  background:#111;
+}
+
+.card,.mission{
+  background:#1b1b1b;
+  border-radius:8px;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:0 0 20px black;
+  transition:.3s;
+}
+
+.card:hover,.mission:hover{
+  transform:translateY(-10px);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  transition:.4s;
+}
+
+.card:hover img{
+  transform:scale(1.12);
+}
+
+.card h3,.mission h3{
+  padding-top:18px;
+  letter-spacing:2px;
+}
+
+.card p,.mission p{
+  color:#aaa;
+  padding:10px 18px 24px;
+  font-size:14px;
+}
+
+.section{
+  padding:70px 12%;
+  background:#050505;
+}
+
+.section h2{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:30px;
+}
+
+.panel{
+  background:#111;
+  padding:35px;
+  border-radius:8px;
+  border:1px solid #333;
+}
+
+ul{
+  font-size:18px;
+  line-height:2;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:17px;
+}
+
+th,td{
+  border:1px solid #444;
+  padding:16px;
+  text-align:center;
+}
+
+th{background:#222}
+tr:hover{background:#1c1c1c}
+
+.gallery{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.gallery div{
+  background:#111;
+  padding-bottom:18px;
+}
+
+.gallery img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.gallery p{
+  text-align:center;
+  padding-top:14px;
+  color:#ccc;
+}
+
+.quiz{text-align:center}
+
+.quiz p{
+  font-size:22px;
+  margin-bottom:20px;
+}
+
+.quiz label{
+  display:block;
+  margin:15px;
+  font-size:18px;
+}
+
+input[type="submit"]{
+  padding:13px 35px;
+  background:white;
+  color:black;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#result{
+  margin-top:22px;
+  font-size:18px;
+  padding:15px;
+}
+
+.backtop{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:white;
+  color:black;
+  width:45px;
+  height:45px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  border-radius:50%;
+  font-size:22px;
+  font-weight:bold;
+}
+
+footer{
+  background:#000;
+  padding:35px;
+  text-align:center;
+  color:#aaa;
+}
+
+@media(max-width:900px){
+  .cards,.missions,.stats,.gallery{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:42px}
+  .hero p{width:auto}
+}
+
+@media(max-width:600px){
+  .cards,.missions,.stats,.gallery{grid-template-columns:1fr}
+  nav a{display:none}
+}
+
+/* Interactive Planet Explorer */
+.planet-card{
+  cursor:pointer;
+  position:relative;
+}
+
+
+
+.planet-viewer{
+  width:84%;
+  margin:0 auto 60px;
+  background:#0e0e0e;
+  border:1px solid #2b2b2b;
+  border-radius:22px;
+  overflow:hidden;
+  display:none;
+  grid-template-columns:1fr 1.25fr;
+  box-shadow:none;
+}
+
+.planet-viewer.active{
+  display:grid;
+}
+
+.planet-viewer-image{
+  min-height:360px;
+  background-size:cover;
+  background-position:center;
+}
+
+.planet-viewer-content{
+  padding:40px;
+}
+
+.planet-viewer-content h2{
+  text-align:left;
+  margin-bottom:15px;
+  font-size:36px;
+}
+
+.planet-viewer-content p{
+  color:#cfcfcf;
+  line-height:1.8;
+  font-size:16px;
+}
+
+.planet-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:28px;
+}
+
+.planet-stat{
+  background:#161616;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:18px;
+}
+
+.planet-stat span{
+  display:block;
+  color:#888;
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.planet-stat strong{
+  font-size:18px;
+  color:#fff;
+}
+
+.close-planet{
+  margin-top:28px;
+  padding:13px 24px;
+  border:1px solid #444;
+  background:#fff;
+  color:#000;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* Clean Premium Trivia Section - No Glow */
+.trivia-box{
+    max-width:800px;
+    margin:auto;
+    background:#111;
+    border:1px solid #222;
+    border-radius:20px;
+    padding:50px;
+}
+
+.trivia-question{
+    font-size:28px;
+    font-weight:600;
+    margin-bottom:35px;
+    text-align:center;
+}
+
+.option{
+    display:block;
+    padding:18px 22px;
+    margin-bottom:15px;
+    background:#181818;
+    border:1px solid #2a2a2a;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.option:hover{
+    background:#202020;
+    border-color:#555;
+}
+
+.quiz-btn{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.quiz-btn:hover{
+    background:#e5e5e5;
+}
+
+#result{
+    margin-top:20px;
+    text-align:center;
+    font-size:18px;
+}
+
+@media(max-width:900px){
+  .planet-viewer{grid-template-columns:1fr}
+  .planet-viewer-image{min-height:260px}
+  .planet-stats{grid-template-columns:1fr}
+}
+
+
+.planet-click-img{
+  cursor:pointer;
+}
+
+.planet-click-img:hover{
+  transform:scale(1.08);
+}
+
+
+/* Interactive Space Missions Explorer */
+.mission{
+  cursor:default;
+}
+
+.mission img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.mission img:hover{
+  transform:scale(1.06);
+}
+
+.mission-viewer{
+  width:84%;
+  margin:0 auto 60px;
+  background:#0e0e0e;
+  border:1px solid #2b2b2b;
+  border-radius:22px;
+  overflow:hidden;
+  display:none;
+  grid-template-columns:1fr 1.25fr;
+  box-shadow:none;
+}
+
+.mission-viewer.active{
+  display:grid;
+}
+
+.mission-viewer-image{
+  min-height:360px;
+  background-size:cover;
+  background-position:center;
+}
+
+.mission-viewer-content{
+  padding:40px;
+}
+
+.mission-viewer-content h2{
+  text-align:left;
+  margin-bottom:15px;
+  font-size:36px;
+}
+
+.mission-viewer-content p{
+  color:#cfcfcf;
+  line-height:1.8;
+  font-size:16px;
+}
+
+.mission-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:28px;
+}
+
+.mission-stat{
+  background:#161616;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:18px;
+}
+
+.mission-stat span{
+  display:block;
+  color:#888;
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.mission-stat strong{
+  font-size:18px;
+  color:#fff;
+}
+
+.close-mission{
+  margin-top:28px;
+  padding:13px 24px;
+  border:1px solid #444;
+  background:#fff;
+  color:#000;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@media(max-width:900px){
+  .mission-viewer{grid-template-columns:1fr}
+  .mission-viewer-image{min-height:260px}
+  .mission-stats{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<nav>
+  <div class="logo">VIEWSPACE TOUR</div>
+  <div>
+    <a href="#planets">Planets</a>
+    <a href="#missions">Missions</a>
+    <a href="#mars">Mars</a>
+    <a href="#distance">Distance</a>
+    <a href="#trivia">Trivia</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <font color="#00FFFF">
+      <h1>SPACE EXPLORATION<br>SOLAR SYSTEM TOUR</h1>
+    </font>
+    <p>
+      Explore the Solar System through an educational cosmic journey featuring
+      famous space missions, neon planetary headers, Mars facts, planet distance
+      data, and an interactive trivia challenge.
+    </p>
+  </div>
+</div>
+
+<marquee scrollamount="8">
+  <font color="#FFD700" size="5">
+    Apollo 11 • Voyager 1 • Chandrayaan-3 • Mars Perseverance Rover • Artemis Mission • James Webb Space Telescope
+  </font>
+</marquee>
+
+<div class="tabs">
+  <button onclick="location.href='#planets'">PLANETS</button>
+  <button onclick="location.href='#missions'">MISSIONS</button>
+  <button onclick="location.href='#mars'">MARS FACTS</button>
+  <button onclick="location.href='#trivia'">TRIVIA</button>
+</div>
+
+<div class="stats">
+  <div class="stat"><h2>8</h2><p>Planets</p></div>
+  <div class="stat"><h2>1</h2><p>Star</p></div>
+  <div class="stat"><h2>290+</h2><p>Moons</p></div>
+  <div class="stat"><h2>4.6B</h2><p>Years Old</p></div>
+</div>
+
+<div class="timeline">
+  <font color="#FFFFFF"><h2>Solar System Timeline</h2></font>
+  <div class="orbit-line">
+    <div class="orbit-item"><div class="dot"></div><p>Mercury</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Venus</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Earth</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Mars</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Jupiter</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Saturn</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Uranus</p></div>
+    <div class="orbit-item"><div class="dot"></div><p>Neptune</p></div>
+  </div>
+</div>
+
+<section id="planets">
+  <div class="cards">
+    <div class="card planet-card">
+      <img onclick="showPlanet('mercury')" class="planet-click-img" src="https://images.unsplash.com/photo-1614314107768-6018061b5b72?q=80&w=800">
+      <font color="#00FFFF"><h3>MERCURY</h3></font>
+      <p>Closest planet to the Sun.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('venus')" class="planet-click-img" src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=800">
+      <font color="#FF00FF"><h3>VENUS</h3></font>
+      <p>Hottest planet in the Solar System.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('earth')" class="planet-click-img" src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=800">
+      <font color="#00FF00"><h3>EARTH</h3></font>
+      <p>Our home planet.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('mars')" class="planet-click-img" src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=800">
+      <font color="#FF3333"><h3>MARS</h3></font>
+      <p>The Red Planet.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('jupiter')" class="planet-click-img" src="https://images.unsplash.com/photo-1630839437035-dac17da580d0?q=80&w=800">
+      <font color="#FFD700"><h3>JUPITER</h3></font>
+      <p>Largest planet in the Solar System.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('saturn')" class="planet-click-img" src="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?q=80&w=800">
+      <font color="#FFCC99"><h3>SATURN</h3></font>
+      <p>Famous for its rings.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('uranus')" class="planet-click-img" src="https://images.unsplash.com/photo-1447433819943-74a20887a81e?q=80&w=800">
+      <font color="#66FFFF"><h3>URANUS</h3></font>
+      <p>An icy planet tilted on its side.</p>
+    </div>
+
+    <div class="card planet-card">
+      <img onclick="showPlanet('neptune')" class="planet-click-img" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=800">
+      <font color="#3366FF"><h3>NEPTUNE</h3></font>
+      <p>The farthest planet from the Sun.</p>
+    </div>
+  </div>
+
+<div id="planetViewer" class="planet-viewer">
+  <div id="planetViewerImage" class="planet-viewer-image"></div>
+  <div class="planet-viewer-content">
+    <h2 id="planetViewerTitle">Planet Name</h2>
+    <p id="planetViewerText">Click a planet to view details.</p>
+
+    <div class="planet-stats">
+      <div class="planet-stat"><span>Diameter</span><strong id="planetDiameter">-</strong></div>
+      <div class="planet-stat"><span>Moons</span><strong id="planetMoons">-</strong></div>
+      <div class="planet-stat"><span>Day Length</span><strong id="planetDay">-</strong></div>
+      <div class="planet-stat"><span>Planet Type</span><strong id="planetType">-</strong></div>
+    </div>
+
+    <button class="close-planet" onclick="closePlanet()">Close Details</button>
+  </div>
+</div>
+
+</section>
+
+
+<section class="section" id="missions">
+  <font color="#FFD700"><h2>Famous Space Missions</h2></font>
+
+  <div class="missions">
+    <div class="mission">
+      <img onclick="showMission('apollo')" src="https://images.unsplash.com/photo-1517976547714-720226b864c1?q=80&w=1000" alt="Apollo 11 mission">
+      <h3>Apollo 11</h3>
+      <p>First human Moon landing mission.</p>
+    </div>
+
+    <div class="mission">
+      <img onclick="showMission('voyager')" src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1000" alt="Voyager 1 mission">
+      <h3>Voyager 1</h3>
+      <p>Explores interstellar space beyond the planets.</p>
+    </div>
+
+    <div class="mission">
+      <img onclick="showMission('chandrayaan')" src="https://images.unsplash.com/photo-1518365050014-70fe7232897f?q=80&w=1000" alt="Chandrayaan mission">
+      <h3>Chandrayaan-3</h3>
+      <p>India's successful lunar south pole mission.</p>
+    </div>
+
+    <div class="mission">
+      <img onclick="showMission('webb')" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1000" alt="James Webb mission">
+      <h3>James Webb</h3>
+      <p>Powerful telescope studying deep space.</p>
+    </div>
+  </div>
+
+  <div id="missionViewer" class="mission-viewer">
+    <div id="missionViewerImage" class="mission-viewer-image"></div>
+
+    <div class="mission-viewer-content">
+      <h2 id="missionViewerTitle">Mission Name</h2>
+      <p id="missionViewerText">Click a mission image to view details.</p>
+
+      <div class="mission-stats">
+        <div class="mission-stat"><span>Launch Year</span><strong id="missionYear">-</strong></div>
+        <div class="mission-stat"><span>Agency</span><strong id="missionAgency">-</strong></div>
+        <div class="mission-stat"><span>Target</span><strong id="missionTarget">-</strong></div>
+        <div class="mission-stat"><span>Mission Type</span><strong id="missionType">-</strong></div>
+      </div>
+
+      <button class="close-mission" onclick="closeMission()">Close Details</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="mars">
+  <font color="#FF3333"><h2>Mars Facts</h2></font>
+
+  <div class="panel">
+    <ul>
+      <li>Mars is known as the Red Planet because of iron oxide on its surface.</li>
+      <li>Mars has two moons named Phobos and Deimos.</li>
+      <li>Olympus Mons is the tallest volcano in the Solar System.</li>
+      <li>A day on Mars lasts about 24.6 Earth hours.</li>
+      <li>Scientists believe Mars had liquid water in the ancient past.</li>
+      <li>Mars is explored by orbiters, landers, and robotic rovers.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="distance">
+  <font color="#00FFFF"><h2>Planet Distances from the Sun</h2></font>
+
+  <div class="panel">
+    <table>
+      <tr>
+        <th><font color="#FFD700">Planet</font></th>
+        <th><font color="#FFD700">Distance from Sun</font></th>
+        <th><font color="#FFD700">Type</font></th>
+      </tr>
+      <tr><td>Mercury</td><td>57.9 million km</td><td>Rocky Planet</td></tr>
+      <tr><td>Venus</td><td>108.2 million km</td><td>Rocky Planet</td></tr>
+      <tr><td>Earth</td><td>149.6 million km</td><td>Rocky Planet</td></tr>
+      <tr><td>Mars</td><td>227.9 million km</td><td>Rocky Planet</td></tr>
+      <tr><td>Jupiter</td><td>778.5 million km</td><td>Gas Giant</td></tr>
+      <tr><td>Saturn</td><td>1.43 billion km</td><td>Gas Giant</td></tr>
+      <tr><td>Uranus</td><td>2.87 billion km</td><td>Ice Giant</td></tr>
+      <tr><td>Neptune</td><td>4.50 billion km</td><td>Ice Giant</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <font color="#FFFFFF"><h2>Space Gallery</h2></font>
+
+  <div class="gallery">
+    <div>
+      <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1000">
+      <p>Deep Space Galaxy</p>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1000">
+      <p>Earth from Space</p>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=1000">
+      <p>Cosmic Starscape</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="trivia">
+  <h2 style="text-align:center;margin-bottom:40px;">Space Knowledge Check</h2>
+
+  <div class="trivia-box">
+    <form onsubmit="checkAnswer(); return false;">
+
+      <p class="trivia-question">
+        Which planet is known as the Red Planet?
+      </p>
+
+      <label class="option"><input type="radio" name="planet" value="Earth"> Earth</label>
+      <label class="option"><input type="radio" name="planet" value="Mars"> Mars</label>
+      <label class="option"><input type="radio" name="planet" value="Jupiter"> Jupiter</label>
+      <label class="option"><input type="radio" name="planet" value="Saturn"> Saturn</label>
+
+      <button class="quiz-btn" type="submit">Submit Answer</button>
+    </form>
+
+    <p id="result"></p>
+  </div>
+</section>
+
+
+<a href="#" class="backtop">↑</a>
+
+<footer>
+  <font color="#AAAAAA">
+    Space Exploration & Solar System Tour | Educational Cosmic Layout
+  </font>
+</footer>
+
+
+<script>
+function checkAnswer(){
+  var selected=document.querySelector('input[name="planet"]:checked');
+  var result=document.getElementById("result");
+
+  if(!selected){
+    result.innerHTML="<span style='color:#FFD700'>Please select an answer.</span>";
+  }
+  else if(selected.value=="Mars"){
+    result.innerHTML="<span style='color:#7CFC00'>Correct! Mars is known as the Red Planet.</span>";
+  }
+  else{
+    result.innerHTML="<span style='color:#FF6B6B'>Wrong answer. The correct answer is Mars.</span>";
+  }
+}
+
+function showPlanet(planet){
+  const data={
+    mercury:{
+      title:"Mercury",
+      image:"https://images.unsplash.com/photo-1614314107768-6018061b5b72?q=80&w=1200",
+      text:"Mercury is the closest planet to the Sun and the smallest planet in the Solar System. Because it has almost no atmosphere, temperatures change drastically between day and night.",
+      diameter:"4,879 km",
+      moons:"0",
+      day:"59 Earth days",
+      type:"Rocky Planet"
+    },
+    venus:{
+      title:"Venus",
+      image:"https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=1200",
+      text:"Venus is the hottest planet in the Solar System. Its thick carbon dioxide atmosphere traps heat, creating an extreme greenhouse effect.",
+      diameter:"12,104 km",
+      moons:"0",
+      day:"243 Earth days",
+      type:"Rocky Planet"
+    },
+    earth:{
+      title:"Earth",
+      image:"https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=1200",
+      text:"Earth is our home planet and the only known world that supports life. Liquid water, a protective atmosphere, and stable temperatures make it unique.",
+      diameter:"12,742 km",
+      moons:"1",
+      day:"24 hours",
+      type:"Rocky Planet"
+    },
+    mars:{
+      title:"Mars",
+      image:"https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=1200",
+      text:"Mars is called the Red Planet because of iron oxide on its surface. Scientists believe ancient Mars once had rivers, lakes, and possibly oceans.",
+      diameter:"6,779 km",
+      moons:"2",
+      day:"24.6 hours",
+      type:"Rocky Planet"
+    },
+    jupiter:{
+      title:"Jupiter",
+      image:"https://images.unsplash.com/photo-1630839437035-dac17da580d0?q=80&w=1200",
+      text:"Jupiter is the largest planet in the Solar System. It is a gas giant famous for its Great Red Spot, a massive storm larger than Earth.",
+      diameter:"139,820 km",
+      moons:"95+",
+      day:"10 hours",
+      type:"Gas Giant"
+    },
+    saturn:{
+      title:"Saturn",
+      image:"https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?q=80&w=1200",
+      text:"Saturn is known for its beautiful ring system made of ice, dust, and rock particles. It is the second-largest planet in the Solar System.",
+      diameter:"116,460 km",
+      moons:"146+",
+      day:"10.7 hours",
+      type:"Gas Giant"
+    },
+    uranus:{
+      title:"Uranus",
+      image:"https://images.unsplash.com/photo-1447433819943-74a20887a81e?q=80&w=1200",
+      text:"Uranus is an ice giant that rotates on its side. This unusual tilt gives the planet extreme seasons that last for decades.",
+      diameter:"50,724 km",
+      moons:"27",
+      day:"17 hours",
+      type:"Ice Giant"
+    },
+    neptune:{
+      title:"Neptune",
+      image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1200",
+      text:"Neptune is the farthest planet from the Sun. It is known for its deep blue color and extremely powerful winds.",
+      diameter:"49,244 km",
+      moons:"14",
+      day:"16 hours",
+      type:"Ice Giant"
+    }
+  };
+
+  const p=data[planet];
+  document.getElementById("planetViewer").classList.add("active");
+  document.getElementById("planetViewerImage").style.backgroundImage=`url('${p.image}')`;
+  document.getElementById("planetViewerTitle").innerText=p.title;
+  document.getElementById("planetViewerText").innerText=p.text;
+  document.getElementById("planetDiameter").innerText=p.diameter;
+  document.getElementById("planetMoons").innerText=p.moons;
+  document.getElementById("planetDay").innerText=p.day;
+  document.getElementById("planetType").innerText=p.type;
+
+  document.getElementById("planetViewer").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function closePlanet(){
+  document.getElementById("planetViewer").classList.remove("active");
+}
+
+function showMission(mission){
+  const data={
+    apollo:{
+      title:"Apollo 11",
+      image:"https://images.unsplash.com/photo-1517976547714-720226b864c1?q=80&w=1200",
+      text:"Apollo 11 was the historic NASA mission that landed the first humans on the Moon. Neil Armstrong and Buzz Aldrin walked on the lunar surface while Michael Collins orbited above in the command module.",
+      year:"1969",
+      agency:"NASA",
+      target:"Moon",
+      type:"Human Spaceflight"
+    },
+    voyager:{
+      title:"Voyager 1",
+      image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1200",
+      text:"Voyager 1 is one of humanity's farthest spacecraft. It studied the outer planets and later entered interstellar space, continuing to send scientific data from beyond the Solar System.",
+      year:"1977",
+      agency:"NASA",
+      target:"Outer Solar System",
+      type:"Deep Space Probe"
+    },
+    chandrayaan:{
+      title:"Chandrayaan-3",
+      image:"https://images.unsplash.com/photo-1518365050014-70fe7232897f?q=80&w=1200",
+      text:"Chandrayaan-3 is India's successful lunar mission that achieved a soft landing near the Moon's south polar region. It demonstrated landing, rover mobility, and surface science experiments.",
+      year:"2023",
+      agency:"ISRO",
+      target:"Moon South Pole",
+      type:"Lunar Lander & Rover"
+    },
+    webb:{
+      title:"James Webb Space Telescope",
+      image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1200",
+      text:"The James Webb Space Telescope observes the universe in infrared light. It studies early galaxies, star formation, exoplanet atmospheres, and distant cosmic objects with extremely high sensitivity.",
+      year:"2021",
+      agency:"NASA / ESA / CSA",
+      target:"Deep Space",
+      type:"Space Telescope"
+    }
+  };
+
+  const m=data[mission];
+  document.getElementById("missionViewer").classList.add("active");
+  document.getElementById("missionViewerImage").style.backgroundImage=`url('${m.image}')`;
+  document.getElementById("missionViewerTitle").innerText=m.title;
+  document.getElementById("missionViewerText").innerText=m.text;
+  document.getElementById("missionYear").innerText=m.year;
+  document.getElementById("missionAgency").innerText=m.agency;
+  document.getElementById("missionTarget").innerText=m.target;
+  document.getElementById("missionType").innerText=m.type;
+
+  document.getElementById("missionViewer").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function closeMission(){
+  document.getElementById("missionViewer").classList.remove("active");
+}
+
+</script>
+
+
+</body>
+</html>
